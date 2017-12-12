@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>olivier.laurantin@laposte.net</email>
+		<name>Olivier Laurantin</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">linuxmint/pix</remote-id>
+	</upstream>
+	<use>
+		<flag name="http">Enable webservice integration through <pkg>net-libs/libsoup</pkg></flag>
+		<flag name="json">Compile code that uses the libjson-glib library</flag>
+		<flag name="map">Enable image geolocation display on a map through <pkg>media-libs/libchamplain</pkg></flag>
+		<flag name="slideshow">Enable slideshow plugin</flag>
+	</use>
+</pkgmetadata>
