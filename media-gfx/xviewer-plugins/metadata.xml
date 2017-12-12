@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer type="person">
+	<email>olivier.laurantin@laposte.net</email>
+	<name>Olivier Laurantin</name>
+</maintainer>
+	<upstream>
+		<remote-id type="github">linuxmint/xviewer-plugins</remote-id>
+	</upstream>
+<use>
+	<flag name="flickr">Enable uploading to Flickr</flag>
+	<flag name="map">Enable world map display using	<pkg>media-libs/libchamplain</pkg></flag>
+</use>
+</pkgmetadata>
