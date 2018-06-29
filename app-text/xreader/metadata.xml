@@ -9,11 +9,9 @@
 		<remote-id type="github">linuxmint/xreader</remote-id>
 	</upstream>
 	<use>
-		<flag name="caja">Enable property page extension in <pkg>mate-base/caja</pkg></flag>
 		<flag name="comics">Enable comics viewer</flag>
 		<flag name="dvi">Enable DVI viewer</flag>
 		<flag name="epub">Enable EPUB ebook viewer</flag>
-		<flag name="nemo">Enable property page extension in <pkg>gnome-extra/nemo</pkg></flag>
 		<flag name="t1lib">Enable the Type-1 fonts for the DVI viewer</flag>
 		<flag name="xps">Enable XPS viewer</flag>
 	</use>

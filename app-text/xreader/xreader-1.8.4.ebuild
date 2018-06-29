@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI="6"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
 
@@ -15,9 +15,11 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="caja dbus comics djvu dvi epub +introspection gnome-keyring nemo +postscript t1lib tiff xps"
+IUSE="dbus comics djvu dvi epub +introspection gnome-keyring +postscript t1lib tiff xps"
 
 REQUIRED_USE="t1lib? ( dvi )"
+
+PATCHES=( "${FILESDIR}"/${PN}-libview.patch )
 
 RDEPEND="
 	>=dev-libs/glib-2.36:2[dbus]
@@ -28,8 +30,8 @@ RDEPEND="
 	x11-libs/libX11:0
 	>=x11-libs/cairo-1.14:=
 	>=x11-libs/gtk+-3.14:3[introspection?]
+	>=x11-libs/xapps-1.1.0
 	>=app-text/poppler-0.22:=[cairo]
-	caja? ( >=mate-base/caja-1.9[gtk3,introspection?] )
 	djvu? ( >=app-text/djvu-3.5.17:= )
 	dvi? (
 		virtual/tex-base
@@ -39,7 +41,6 @@ RDEPEND="
 	epub? ( >=net-libs/webkit-gtk-2.4.3:4 )
 	gnome-keyring? ( >=app-crypt/libsecret-0.5 )
 	introspection? ( >=dev-libs/gobject-introspection-0.6:= )
-	nemo? ( >=gnome-extra/nemo-3.0[introspection?] )
 	postscript? ( >=app-text/libspectre-0.2:0 )
 	tiff? ( >=media-libs/tiff-3.6:0= )
 	xps? ( >=app-text/libgxps-0.2.1:= )
@@ -63,14 +64,12 @@ src_configure() {
 		--enable-previewer \
 		--enable-thumbnailer \
 		$(use_with gnome-keyring keyring) \
-		$(use_enable caja) \
 		$(use_enable comics) \
 		$(use_enable dbus) \
 		$(use_enable djvu) \
 		$(use_enable dvi) \
 		$(use_enable epub) \
 		$(use_enable introspection) \
-		$(use_enable nemo) \
 		$(use_enable postscript ps) \
 		$(use_enable t1lib) \
 		$(use_enable tiff) \
