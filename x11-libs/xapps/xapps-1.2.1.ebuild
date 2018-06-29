@@ -1,10 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python{3_4,3_5} )
+PYTHON_COMPAT=( python{3_5,3_6} )
 
-inherit autotools gnome2-utils python-single-r1 xdg-utils
+inherit meson gnome2-utils python-single-r1 xdg-utils
 
 DESCRIPTION="Cross-desktop libraries and common resources"
 HOMEPAGE="https://github.com/linuxmint/xapps/"
@@ -14,7 +14,7 @@ SRC_URI="https://github.com/linuxmint/xapps/archive/${PV}.tar.gz -> ${P}.tar.gz"
 KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
-IUSE="introspection static-libs"
+IUSE="doc"
 
 RDEPEND="
 	${PYTHON_DEPS}
@@ -23,32 +23,28 @@ RDEPEND="
 	gnome-base/libgnomekbd
 	gnome-base/gnome-common
 	x11-libs/cairo
-	>=x11-libs/gdk-pixbuf-2.22.0:2[introspection?]
-	>=x11-libs/gtk+-3.3.16:3[introspection?]
+	>=x11-libs/gdk-pixbuf-2.22.0:2[introspection]
+	>=x11-libs/gtk+-3.3.16:3[introspection]
 	x11-libs/libxkbfile
 "
 DEPEND="${RDEPEND}
 	sys-devel/gettext
-	dev-util/gtk-doc
-	dev-util/gtk-doc-am
+	doc? (
+		dev-util/gtk-doc
+		dev-util/gtk-doc-am
+	)
 "
 
-src_prepare() {
-	xdg_environment_reset
-	default
-	eautoreconf
-}
-
 src_configure() {
-	econf \
-		--enable-gtk-doc \
-		--enable-gtk-doc-html \
-		$(use_enable introspection) \
-		$(use_enable static-libs static)
+	local emesonargs=(
+		-Ddocs=$(usex doc true false)
+	)
+	meson_src_configure
 }
 
 src_install() {
 	default
+	meson_src_install
 	rm -rf "${ED%/}"/usr/bin || die
 
 	# package provides .pc files
