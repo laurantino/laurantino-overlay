@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI="6"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
 PYTHON_COMPAT=( python2_7 )
@@ -33,7 +33,7 @@ RDEPEND="
 	>=x11-libs/cairo-1.14
 	>=x11-libs/gdk-pixbuf-2.23.0:2
 	>=x11-libs/gtk+-3.16:3[introspection?]
-	>=x11-libs/xapps-1.0.0[introspection?]
+	>=x11-libs/xapps-1.0.0
 	>=media-libs/gstreamer-1.3.1:1.0
 	>=media-libs/gst-plugins-base-1.4.2:1.0[X,introspection?,pango]
 	media-libs/gst-plugins-good:1.0
@@ -66,8 +66,7 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.50.1
 	sys-devel/gettext
 	virtual/pkgconfig
-	x11-proto/xextproto
-	x11-proto/xproto
+	x11-base/xorg-proto
 
 	dev-libs/gobject-introspection-common
 	gnome-base/gnome-common
