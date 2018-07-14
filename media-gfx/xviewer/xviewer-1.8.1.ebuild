@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI="6"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
 
@@ -20,7 +20,7 @@ RDEPEND="
 	>=dev-libs/glib-2.38.0:2[dbus]
 	>=x11-libs/gtk+-3.10.0:3[introspection?,X]
 	>=dev-libs/libpeas-0.7.4:=[gtk]
-	>=gnome-base/gnome-desktop-2.91.2:3=
+	>=gnome-extra/cinnamon-desktop-3.2.0
 	>=gnome-base/gsettings-desktop-schemas-2.91.92
 	>=dev-libs/libxml2-2.0:2
 	sys-libs/zlib
