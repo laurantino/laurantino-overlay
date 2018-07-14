@@ -1,10 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI="6"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{3_4,3_5} )
+PYTHON_COMPAT=( python{3_5,3_6} )
 
 inherit gnome2 python-single-r1
 
@@ -16,7 +16,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="+exif flickr map +python"
+IUSE="+exif map +python"
 REQUIRED_USE="
 	map? ( exif )
 	python? ( ${PYTHON_REQUIRED_USE} )
@@ -28,7 +28,6 @@ RDEPEND="
 	>=media-gfx/xviewer-1.2.0:0
 	>=x11-libs/gtk+-3.14:3
 	exif? ( >=media-libs/libexif-0.6.16 )
-	flickr? ( media-gfx/postr )
 	map? (
 		media-libs/libchamplain:0.12[gtk]
 		>=media-libs/clutter-1.9.4:1.0
@@ -56,7 +55,6 @@ pkg_setup() {
 src_configure() {
 	local plugins="fit-to-width,send-by-mail,light-theme"
 	use exif && plugins="${plugins},exif-display"
-	use flickr && plugins="${plugins},postr"
 	use map && plugins="${plugins},map"
 	use python && plugins="${plugins},slideshowshuffle,pythonconsole,export-to-folder"
 	gnome2_src_configure \
