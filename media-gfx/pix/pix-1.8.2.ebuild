@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI="6"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
 
@@ -19,7 +19,7 @@ REQUIRED_USE="map? ( exif )"
 
 RDEPEND="
 	>=dev-libs/glib-2.36.0:2[dbus]
-	>=x11-libs/gtk+-3.10.0:3
+	>=x11-libs/gtk+-3.20.0:3
 	>=gnome-base/gsettings-desktop-schemas-0.1.4
 	media-libs/libpng:0=
 	sys-libs/zlib
