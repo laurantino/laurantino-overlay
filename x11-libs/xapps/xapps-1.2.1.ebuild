@@ -14,7 +14,7 @@ SRC_URI="https://github.com/linuxmint/xapps/archive/${PV}.tar.gz -> ${P}.tar.gz"
 KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
-IUSE="doc"
+IUSE="doc +introspection"
 
 RDEPEND="
 	${PYTHON_DEPS}
@@ -23,8 +23,8 @@ RDEPEND="
 	gnome-base/libgnomekbd
 	gnome-base/gnome-common
 	x11-libs/cairo
-	>=x11-libs/gdk-pixbuf-2.22.0:2[introspection]
-	>=x11-libs/gtk+-3.3.16:3[introspection]
+	>=x11-libs/gdk-pixbuf-2.22.0:2[introspection?]
+	>=x11-libs/gtk+-3.3.16:3[introspection?]
 	x11-libs/libxkbfile
 "
 DEPEND="${RDEPEND}
