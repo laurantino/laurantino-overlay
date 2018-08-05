@@ -1,10 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI="6"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{3_4,3_5} )
+PYTHON_COMPAT=( python3_{5,6} )
 
 inherit gnome2 python-single-r1 xdg-utils
 
@@ -17,29 +17,25 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+introspection spell"
 
-COMMOND_DEPEND="
+RDEPEND="
 	${PYTHON_DEPS}
-	>=dev-python/pygobject-3:3[${PYTHON_USEDEP}]
-	>=dev-libs/libpeas-1.12.0[python,${PYTHON_USEDEP}]
-	>=dev-libs/libxml2-2.5:2
-	>=dev-libs/glib-2.40:2[dbus]
-	>=x11-libs/gtk+-3.18:3
-	>=x11-libs/gtksourceview-3.18:3
-	>=dev-libs/libpeas-1.12.0[gtk]
+	>=dev-libs/libxml2-2.5.0:2
+	>=dev-libs/glib-2.44:2[dbus]
+	>=x11-libs/gtk+-3.21.3:3[introspection?]
+	>=x11-libs/gtksourceview-3.22.0:3.0[introspection?]
+	>=dev-libs/libpeas-1.14.1[gtk,python,${PYTHON_USEDEP}]
+	>=dev-python/pygobject-3:3[cairo,${PYTHON_USEDEP}]
+
 	gnome-base/gsettings-desktop-schemas
 	gnome-base/gvfs
+
 	x11-libs/libX11
-	x11-libs/libSM
-	introspection ? ( dev-libs/gobject-introspection-0.9.3:= )
-	spell? (
-		>=app-text/enchant-1.2.0
-		>=app-text/iso-codes-0.35
-	)
+
+	introspection? ( >=dev-libs/gobject-introspection-0.9.3:= )
+	spell? ( >=app-text/gspell-0.2.5:0= )
 "
 
-RDEPEND="${COMMON_DEPEND}"
-
-DEPEND="${COMMON_DEPEND}
+DEPEND="${RDEPEND}
 	gnome-base/gnome-common
 	app-text/docbook-xml-dtd:4.1.2
 	app-text/yelp-tools
