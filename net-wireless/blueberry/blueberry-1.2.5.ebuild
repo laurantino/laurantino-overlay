@@ -47,11 +47,6 @@ src_install() {
 	doins -r usr/share
 }
 
-pkg_preinst() {
-	gnome2_schemas_savelist
-	gnome2_icon_savelist
-}
-
 pkg_postinst() {
 	gnome2_schemas_update
 	gnome2_icon_cache_update
