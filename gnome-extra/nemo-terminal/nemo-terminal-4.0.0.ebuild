@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_6 )
 
 inherit python-single-r1 gnome2-utils
 
@@ -32,11 +32,6 @@ src_install() {
 
 	insinto usr/share/nemo-terminal
 	doins pixmap/logo_120x120.png
-}
-
-pkg_preinst() {
-	gnome2_icon_savelist
-	gnome2_schemas_savelist
 }
 
 pkg_postinst() {
