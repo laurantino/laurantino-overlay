@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-PYTHON_COMPAT=( python2_7 )
+EAPI="7"
+PYTHON_COMPAT=( python3_6 )
 
 inherit python-single-r1
 
@@ -23,7 +23,6 @@ RDEPEND=">=gnome-extra/nemo-${PV}[introspection]
 
 src_install() {
 	default
-	python_fix_shebang nemo-extension
 	exeinto usr/share/nemo-python/extensions/
 	doexe nemo-extension/nemo-audio-tab.py
 	insinto usr/share/nemo-python/extensions/
