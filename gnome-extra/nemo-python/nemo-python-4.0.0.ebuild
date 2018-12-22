@@ -1,12 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-GNOME2_EAUTORECONF="yes"
-GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python2_7 )
+EAPI="7"
+PYTHON_COMPAT=( python3_6 )
 
-inherit gnome2 python-single-r1
+inherit meson python-single-r1
 
 DESCRIPTION="Python binding for Nemo components"
 HOMEPAGE="https://github.com/linuxmint/nemo-extensions"
@@ -25,7 +23,3 @@ DEPEND="${RDEPEND}
 	>=dev-util/gtk-doc-am-1.9
 	virtual/pkgconfig
 "
-
-src_prepare() {
-	gnome2_src_prepare
-}
