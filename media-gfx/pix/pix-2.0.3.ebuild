@@ -9,7 +9,7 @@ inherit gnome2
 
 DESCRIPTION="X-Apps image management application"
 HOMEPAGE="https://github.com/linuxmint/pix"
-SRC_URI="https://github.com/linuxmint/${PN}/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+SRC_URI="https://github.com/linuxmint/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -26,7 +26,7 @@ RDEPEND="
 	x11-libs/libICE
 	x11-libs/libSM
 	cdr? ( >=app-cdr/brasero-3.2 )
-	exif? ( >=media-gfx/exiv2-0.21 )
+	exif? ( >=media-gfx/exiv2-0.27:= )
 	gnome-keyring? ( >=app-crypt/libsecret-0.11 )
 	gstreamer? (
 		media-libs/gstreamer:1.0
@@ -58,6 +58,8 @@ DEPEND="${RDEPEND}
 	sys-devel/flex
 	virtual/pkgconfig
 "
+
+PATCHES=( "${FILESDIR}"/${P}-exiv2-0.27.patch )
 
 src_configure() {
 	DOCS="AUTHORS README"

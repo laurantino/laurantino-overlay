@@ -1,0 +1,30 @@
+--- a/extensions/exiv2_tools/exiv2-utils.cpp	2019-01-13 11:29:32.125703378 +0100
++++ b/extensions/exiv2_tools/exiv2-utils.cpp	2019-01-13 11:52:28.223605972 +0100
+@@ -24,17 +24,13 @@
+ #include <glib.h>
+ #define GDK_PIXBUF_ENABLE_BACKEND
+ #include <gdk-pixbuf/gdk-pixbuf.h>
+-#include <exiv2/basicio.hpp>
+-#include <exiv2/error.hpp>
+-#include <exiv2/image.hpp>
+-#include <exiv2/exif.hpp>
++#include <exiv2/exiv2.hpp>
+ #include <iostream>
+ #include <iomanip>
+ #include <string>
+ #include <sstream>
+ #include <vector>
+ #include <iomanip>
+-#include <exiv2/xmp.hpp>
+ #include <pix.h>
+ #include "exiv2-utils.h"
+ 
+@@ -947,7 +943,7 @@
+ 
+ 	try {
+ 		if (exifData.empty()) {
+-			throw Exiv2::Error(1, " No Exif data found in the file");
++			throw Exiv2::Error(Exiv2::ErrorCode::kerErrorMessage, "No Exif data found in the file");
+ 		}
+ 		Exiv2::ExifData::const_iterator end = exifData.end();
+ 		for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
