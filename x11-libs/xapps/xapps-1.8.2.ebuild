@@ -1,10 +1,11 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python{3_5,3_6} )
+EAPI=7
 
-inherit meson gnome2-utils python-single-r1 xdg-utils
+PYTHON_COMPAT=( python{3_6,3_7,3_8} )
+
+inherit meson python-single-r1 vala xdg-utils
 
 DESCRIPTION="Cross-desktop libraries and common resources"
 HOMEPAGE="https://github.com/linuxmint/xapps/"
@@ -14,30 +15,37 @@ SRC_URI="https://github.com/linuxmint/xapps/archive/${PV}.tar.gz -> ${P}.tar.gz"
 KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
-IUSE="doc +introspection"
+IUSE="gtk-doc +introspection static-libs"
 
-RDEPEND="
+DEPEND="
 	${PYTHON_DEPS}
 	>=dev-libs/glib-2.37.3:2
-	dev-libs/gobject-introspection:0=[${PYTHON_USEDEP}]
+	dev-libs/gobject-introspection:0=[${PYTHON_SINGLE_USEDEP}]
+	dev-libs/libdbusmenu[gtk3]
 	gnome-base/libgnomekbd
-	gnome-base/gnome-common
 	x11-libs/cairo
 	>=x11-libs/gdk-pixbuf-2.22.0:2[introspection?]
 	>=x11-libs/gtk+-3.3.16:3[introspection?]
+	x11-libs/libX11
 	x11-libs/libxkbfile
 "
-DEPEND="${RDEPEND}
+RDEPEND="${DEPEND}"
+
+BDEPEND="
 	sys-devel/gettext
-	doc? (
-		dev-util/gtk-doc
-		dev-util/gtk-doc-am
-	)
+	gtk-doc? ( dev-util/gtk-doc	)
+	$(vala_depend)
 "
+
+src_prepare() {
+	xdg_environment_reset
+	vala_src_prepare
+	default
+}
 
 src_configure() {
 	local emesonargs=(
-		-Ddocs=$(usex doc true false)
+		$(meson_use gtk-doc docs)
 	)
 	meson_src_configure
 }
@@ -45,16 +53,15 @@ src_configure() {
 src_install() {
 	default
 	meson_src_install
-	rm -rf "${ED%/}"/usr/bin || die
+	python_optimize
 
-	# package provides .pc files
-	find "${D}" -name '*.la' -delete || die
+	rm -rf "${ED%/}"/usr/bin || die
 }
 
 pkg_postinst() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
