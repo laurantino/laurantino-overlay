@@ -5,13 +5,11 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-DISTUTILS_USE_SETUPTOOLS=no
-
 inherit distutils-r1
 
 DESCRIPTION="Python bindings for x11-libs/xapps"
-HOMEPAGE="https://github.com/linuxmint/python-xapp"
-SRC_URI="https://github.com/linuxmint/python-xapp/archive/${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/linuxmint/python3-xapp"
+SRC_URI="https://github.com/linuxmint/python3-xapp/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="LGPL-2"
 SLOT="0"
