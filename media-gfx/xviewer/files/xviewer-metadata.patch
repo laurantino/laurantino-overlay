@@ -1,0 +1,11 @@
+--- a/data/Makefile.am	2020-06-29 21:03:59.736253500 +0200
++++ b/data/Makefile.am	2020-06-29 21:04:24.188351500 +0200
+@@ -9,7 +9,7 @@
+ desktop_DATA = $(DESKTOP_FILES)
+ 
+ @INTLTOOL_XML_RULE@
+-appdatadir = $(datadir)/appdata
++appdatadir = $(datadir)/metainfo
+ appdata_in_files = xviewer.appdata.xml.in
+ appdata_DATA = $(appdata_in_files:.xml.in=.xml)
+ 
