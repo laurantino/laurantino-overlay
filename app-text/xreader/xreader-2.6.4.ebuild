@@ -1,11 +1,9 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-GNOME2_EAUTORECONF="yes"
-GNOME2_LA_PUNT="yes"
+EAPI="7"
 
-inherit gnome2
+inherit gnome2-utils meson xdg
 
 DESCRIPTION="X-Apps document reader"
 HOMEPAGE="https://github.com/linuxmint/xreader"
@@ -15,11 +13,11 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="dbus comics djvu dvi epub +introspection gnome-keyring +postscript t1lib tiff xps"
+IUSE="dbus comics djvu dvi epub gnome-keyring gtk-doc +introspection +postscript t1lib tiff xps"
 
 REQUIRED_USE="t1lib? ( dvi )"
 
-PATCHES=( "${FILESDIR}"/${PN}-libview.patch )
+PATCHES=( "${FILESDIR}"/${PN}-{metadata,wayland}.patch )
 
 RDEPEND="
 	>=dev-libs/glib-2.36:2[dbus]
@@ -38,7 +36,10 @@ RDEPEND="
 		dev-libs/kpathsea:=
 		t1lib? ( >=media-libs/t1lib-5:= )
 	)
-	epub? ( >=net-libs/webkit-gtk-2.4.3:4 )
+	epub? (
+		>=dev-libs/mathjax-2:=
+		>=net-libs/webkit-gtk-2.4.3:4
+	)
 	gnome-keyring? ( >=app-crypt/libsecret-0.5 )
 	introspection? ( >=dev-libs/gobject-introspection-0.6:= )
 	postscript? ( >=app-text/libspectre-0.2:0 )
@@ -47,31 +48,49 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}
-	gnome-base/gnome-common
 	app-text/docbook-xml-dtd:4.1.2
 	app-text/yelp-tools:0
-	dev-util/gtk-doc-am
+	gtk-doc? ( >=dev-util/gtk-doc-1 )
 	>=dev-util/intltool-0.50.1
 	sys-devel/gettext
 	virtual/pkgconfig"
 
 src_configure() {
-	DOCS="AUTHORS README"
-	gnome2_src_configure \
-		--disable-tests \
-		--enable-pixbuf \
-		--enable-pdf \
-		--enable-previewer \
-		--enable-thumbnailer \
-		$(use_with gnome-keyring keyring) \
-		$(use_enable comics) \
-		$(use_enable dbus) \
-		$(use_enable djvu) \
-		$(use_enable dvi) \
-		$(use_enable epub) \
-		$(use_enable introspection) \
-		$(use_enable postscript ps) \
-		$(use_enable t1lib) \
-		$(use_enable tiff) \
-		$(use_enable xps)
+	local emesonargs=(
+		-Ddeprecated_warnings=false
+		-Dhelp_files=true
+		-Dpixbuf=true
+		-Dpdf=true
+		-Dpreviewer=true
+		-Dthumbnailer=true
+		$(meson_use gnome-keyring keyring)
+		$(meson_use gtk-doc docs)
+		$(meson_use comics)
+		$(meson_use dbus enable_dbus)
+		$(meson_use djvu)
+		$(meson_use dvi)
+		$(meson_use epub)
+		$(meson_use introspection)
+		$(meson_use postscript ps)
+		$(meson_use t1lib)
+		$(meson_use tiff)
+		$(meson_use xps)
+	)
+	meson_src_configure
+}
+
+pkg_postinst() {
+	xdg_pkg_postinst
+	xdg_desktop_database_update
+	xdg_icon_cache_update
+	xdg_mimeinfo_database_update
+	gnome2_schemas_update
+}
+
+pkg_postrm() {
+	xdg_pkg_postrm
+	xdg_desktop_database_update
+	xdg_icon_cache_update
+	xdg_mimeinfo_database_update
+	gnome2_schemas_update
 }

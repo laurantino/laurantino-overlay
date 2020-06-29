@@ -1,0 +1,10 @@
+--- a/libdocument/ev-document-misc.h	2020-06-29 18:13:19.762579030 +0200
++++ b/libdocument/ev-document-misc.h	2020-06-29 18:12:57.409212826 +0200
+@@ -29,7 +29,6 @@
+ #include <cairo.h>
+ 
+ #include <gdk-pixbuf/gdk-pixbuf.h>
+-#include <gdk/gdkwayland.h>
+ #include <gtk/gtk.h>
+ #include "ev-macros.h"
+
