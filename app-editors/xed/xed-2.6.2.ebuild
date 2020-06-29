@@ -61,9 +61,17 @@ src_configure() {
 		-Ddeprecated_warnings=false
 		-Denable_gvfs_metadata=true
 		$(meson_use gtk-doc docs)
-		$(meson_use spell)
+		$(meson_use spell enable_spell)
 	)
 	meson_src_configure
+}
+
+src_install() {
+	meson_src_install
+	if use python; then
+		python_optimize
+		python_optimize "${ED}/usr/$(get_libdir)/xed/plugins/"
+	fi
 }
 
 pkg_postinst() {
