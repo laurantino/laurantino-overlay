@@ -1,8 +1,8 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit gnome2-utils meson python-single-r1 xdg
 
@@ -17,16 +17,16 @@ IUSE="+introspection +python gtk-doc spell"
 REQUIRED_USE="python? ( introspection ${PYTHON_REQUIRED_USE} ) spell? ( python )"
 
 DEPEND="
-	>=dev-libs/glib-2.44:2
-	>=x11-libs/gtk+-3.21.3:3[introspection?]
-	>=x11-libs/gtksourceview-3.22.0:3.0[introspection?]
-	>=dev-libs/libpeas-1.14.1[gtk]
+	>=dev-libs/glib-2.40:2
+	>=x11-libs/gtk+-3.19.3:3[introspection?]
+	>=x11-libs/gtksourceview-4.0.3:4[introspection?]
+	>=dev-libs/libpeas-1.12.0[gtk]
 	>=dev-libs/libxml2-2.5.0:2
 	x11-libs/libX11
-	>=x11-libs/xapps-1.4.0[introspection?]
+	>=x11-libs/xapps-1.9.0[introspection?]
 
 	spell? ( >=app-text/gspell-0.2.5:0= )
-	introspection? ( >=dev-libs/gobject-introspection-0.9.3:= )
+	introspection? ( >=dev-libs/gobject-introspection-1.42.0:= )
 	python? (
 		${PYTHON_DEPS}
 		$(python_gen_cond_dep '
