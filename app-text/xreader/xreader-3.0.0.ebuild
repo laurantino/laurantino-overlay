@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -17,7 +17,7 @@ IUSE="dbus comics djvu dvi epub gnome-keyring gtk-doc +introspection +postscript
 
 REQUIRED_USE="t1lib? ( dvi )"
 
-PATCHES=( "${FILESDIR}"/${PN}-{metadata,wayland}.patch )
+PATCHES=( "${FILESDIR}"/${PN}-wayland.patch )
 
 RDEPEND="
 	>=dev-libs/glib-2.36:2[dbus]
@@ -28,7 +28,7 @@ RDEPEND="
 	x11-libs/libX11:0
 	>=x11-libs/cairo-1.14:=
 	>=x11-libs/gtk+-3.14:3[introspection?]
-	>=x11-libs/xapps-1.1.0
+	>=x11-libs/xapps-1.9.0
 	>=app-text/poppler-0.22:=[cairo]
 	djvu? ( >=app-text/djvu-3.5.17:= )
 	dvi? (
