@@ -1,8 +1,8 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{7,8,9} )
+PYTHON_COMPAT=( python3_{8,9,10} )
 
 inherit gnome2-utils meson python-single-r1 xdg
 
@@ -23,7 +23,7 @@ DEPEND="
 	>=dev-libs/libpeas-1.12.0[gtk]
 	>=dev-libs/libxml2-2.5.0:2
 	x11-libs/libX11
-	>=x11-libs/xapps-1.9.0[introspection?]
+	>=x11-libs/xapp-1.9.0[introspection?]
 
 	spell? ( >=app-text/gspell-0.2.5:0= )
 	introspection? ( >=dev-libs/gobject-introspection-1.42.0:= )
