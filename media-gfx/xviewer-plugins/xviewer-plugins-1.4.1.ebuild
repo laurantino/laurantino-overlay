@@ -1,10 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{3_5,3_6} )
+PYTHON_COMPAT=( python{3_8,3_9,3_10} )
 
 inherit gnome2 python-single-r1
 
@@ -34,9 +34,11 @@ RDEPEND="
 		>=media-libs/clutter-gtk-1.1.2:1.0 )
 	python? (
 		${PYTHON_DEPS}
-		>=dev-libs/glib-2.32:2[dbus]
-		dev-libs/libpeas:=[gtk,python,${PYTHON_USEDEP}]
+		$(python_gen_cond_dep '
+		dev-libs/libpeas:=[gtk,python,${PYTHON_SINGLE_USEDEP}]
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
+	    ')
+		>=dev-libs/glib-2.32:2[dbus]
 		gnome-base/gsettings-desktop-schemas
 		media-gfx/xviewer[introspection]
 		x11-libs/gtk+:3[introspection] )
@@ -53,7 +55,7 @@ pkg_setup() {
 }
 
 src_configure() {
-	local plugins="fit-to-width,send-by-mail,light-theme"
+	local plugins="send-by-mail,light-theme"
 	use exif && plugins="${plugins},exif-display"
 	use map && plugins="${plugins},map"
 	use python && plugins="${plugins},slideshowshuffle,pythonconsole,export-to-folder"
