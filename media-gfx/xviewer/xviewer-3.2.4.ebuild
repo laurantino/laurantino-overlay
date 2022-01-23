@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes"
 
@@ -28,6 +28,7 @@ RDEPEND="
 	sys-libs/zlib
 	>=x11-libs/gdk-pixbuf-2.4.0:2[jpeg?,tiff?]
 	x11-libs/libX11
+	>=x11-libs/xapp-2.2.7
 	exif? ( >=media-libs/libexif-0.6.14 )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.3:= )
 	jpeg? ( virtual/jpeg:0 )
